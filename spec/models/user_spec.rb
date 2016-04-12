@@ -8,6 +8,7 @@ describe User, type: :model do
     it 'should register' do
       @user = User.register! 'example@gmail.com', 'secret'
       expect(@user.persisted?).to be_truthy
+      expect(User.count).to be 1
     end
 
     it 'should authenticate' do
@@ -18,6 +19,9 @@ describe User, type: :model do
 
       expect(@user).to eq @authenticated_user
 
+      @not_authenticated_user = User.authenticate email, 'wrong_password'
+      expect(@not_authenticated_user).to be_nil
     end
+
   end
 end
