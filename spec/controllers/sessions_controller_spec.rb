@@ -21,5 +21,11 @@ describe SessionsController, type: :controller do
   it 'should redirect back if wrong password' do
     post :create, sessions: { email: 'wrong_email', password: 'wrong password' }
     expect(response).to redirect_to(new_sessions_path)
+    expect(flash[:error]).to eq(I18n.t('sessions.user_not_found'))
+  end
+  it 'should redirect back if blank credentials' do
+    post :create, sessions: { email: '', password: '' }
+    expect(response).to redirect_to(new_sessions_path)
+    expect(flash[:error]).to eq(I18n.t('sessions.please_enter_credentials'))
   end
 end
