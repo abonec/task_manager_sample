@@ -1,0 +1,7 @@
+.login-form
+  = simple_form_for :sessions, url: sessions_path do |form|
+    .form-group
+      = form.input :email, input_html: { class: 'form-control', type: :email }, required: false
+    .form-group
+      = form.input :password, input_html: { class: 'form-control', type: :password }, required: false
+    = form.button :submit, I18n.t('sessions.submit'), class: 'btn btn-primary'

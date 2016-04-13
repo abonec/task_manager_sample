@@ -6,7 +6,7 @@ describe SessionsController, type: :controller do
     @user = create(:user)
   end
   it 'should authenticate user' do
-    post :create, email: @user.email, password: @user.password
+    post :create, sessions: { email: @user.email, password: @user.password }
 
     expect(response).to redirect_to(tasks_path)
     expect(session[:user_id]).to eq(@user.id)
@@ -14,12 +14,12 @@ describe SessionsController, type: :controller do
   end
 
   it 'should redirect back if wrong password' do
-    post :create, email: @user.email, password: 'wrong password'
+    post :create, sessions: { email: @user.email, password: 'wrong password' }
     expect(response).to redirect_to(new_sessions_path)
   end
 
   it 'should redirect back if wrong password' do
-    post :create, email: 'wrong_email', password: 'wrong password'
+    post :create, sessions: { email: 'wrong_email', password: 'wrong password' }
     expect(response).to redirect_to(new_sessions_path)
   end
 end

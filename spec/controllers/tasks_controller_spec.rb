@@ -6,6 +6,7 @@ describe TasksController, type: :controller do
         index: {method: :get},
         edit: {method: :get, params: {id: 1}},
         show: {method: :get, params: {id: 1}},
+        update: {method: :put, params: {id: 1}},
     }.each do |action, options|
       it "from #{action}" do
         send(options[:method], action, options[:params])

@@ -20,4 +20,12 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  sessions:
+    submit: 'Login'
+    please_enter_credentials: 'Please enter credentials'
+    user_not_found: 'User not found'
+  simple_form:
+    labels:
+      sessions:
+        email: 'Email'
+        password: 'Password'
