@@ -1,9 +1,12 @@
 class TasksController < ApplicationController
   before_filter :login_required
-  before_filter :find_task, only: [:edit, :show, :update]
+  before_filter :find_task, only: [:edit, :show, :update, :destroy]
   def index
     @tasks = current_user.tasks
-    render text: current_user.email
+  end
+
+  def new
+    @task = Task.new
   end
 
   def create
@@ -24,11 +27,14 @@ class TasksController < ApplicationController
   end
 
   def edit
-    render text: @task.name
   end
 
   def show
-    render text: @task.name
+  end
+
+  def destroy
+    @task.destroy
+    redirect_to tasks_path
   end
 
   private
