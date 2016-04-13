@@ -1,28 +1,12 @@
+{<img src="https://travis-ci.org/abonec/task_manager_sample.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/abonec/task_manager_sample]
+
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Sample task manager app.
 
 Things you may want to cover:
 
-* Ruby version
+* Ruby 2.2.2
 
-* System dependencies
+* Tests: bundle exec rspec
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
