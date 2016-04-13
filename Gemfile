@@ -54,6 +54,7 @@ group :development, :test do
   gem 'simplecov', require: false
   gem 'rspec-rails'
   gem 'shoulda'
+  gem 'factory_girl_rails'
 end
 
 group :development do
