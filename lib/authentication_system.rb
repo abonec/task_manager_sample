@@ -12,12 +12,21 @@ module AuthenticationSystem
     @current_user
   end
 
+  def login_required
+    logged_in? || access_denied
+  end
+
   def logged_in?
     !!current_user
   end
 
+  def access_denied
+    respond_to do |format|
+      format.html { redirect_to new_sessions_path }
+    end
+  end
+
   def login_from_session
     self.current_user = User.find_by_id(session[:user_id]) if session[:user_id]
-    raise 'need to check this code'
   end
 end
