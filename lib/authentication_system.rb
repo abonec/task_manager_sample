@@ -15,7 +15,7 @@ module AuthenticationSystem
   end
 
   def logged_in?
-    !!current_user
+    current_user
   end
 
   def access_denied
