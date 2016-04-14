@@ -20,10 +20,26 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  common:
+    show: 'Show'
+    edit: 'Edit'
+    destroy: 'Destroy'
+    are_you_sure: 'Are you sure?'
+    back: 'Back'
   sessions:
     submit: 'Login'
     please_enter_credentials: 'Please enter credentials'
     user_not_found: 'User not found'
+  tasks:
+    show_task: 'Show task'
+    id: 'Id'
+    new_task: 'New task'
+    listing_tasks: 'Listing tasks'
+    name: 'Name'
+    description: 'Description'
+    created_at: 'Created at'
+    user: 'User'
+    state: 'State'
   simple_form:
     labels:
       sessions:

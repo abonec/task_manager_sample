@@ -1,4 +1,9 @@
 module AuthenticationSystem
+
+  def self.included(base)
+    base.send :helper_method, :current_user, :logged_in?, :is_admin? if base.respond_to? :helper_method
+  end
+
   def current_user=(new_user)
     session[:user_id] = new_user ? new_user.id : nil
     @current_user = new_user || false
@@ -16,6 +21,10 @@ module AuthenticationSystem
 
   def logged_in?
     current_user
+  end
+
+  def is_admin?
+    logged_in? && current_user.admin?
   end
 
   def access_denied

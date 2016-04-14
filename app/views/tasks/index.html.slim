@@ -1,18 +1,27 @@
 .page-header
   = link_to new_task_path, class: 'btn btn-primary' do
     span.glyphicon.glyphicon-plus
-    |  New Task
+    = I18n.t('tasks.new_task')
   h1
-    | Listing tasks
+    = I18n.t('tasks.listing_tasks')
 
 .table-responsive
   table.table.table-striped.table-bordered.table-hover
     thead
       tr
         th
-          | Name
+          = I18n.t('tasks.id')
         th
-          | Description
+          = I18n.t('tasks.name')
+        th
+          = I18n.t('tasks.description')
+        th
+          = I18n.t('tasks.state')
+        th
+          = I18n.t('tasks.created_at')
+        - if is_admin?
+          th
+            = I18n.t('tasks.user')
         th
         th
         th
@@ -20,12 +29,21 @@
       - @tasks.each do | task |
         tr
           td
+            = task.id
+          td
             = task.name
           td
             = task.description
           td
-            = link_to 'Show', task
+            = task.state
           td
-            = link_to 'Edit', edit_task_path(task)
+            = task.created_at
+          - if is_admin?
+            td
+              = task.user.email
           td
-            = link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' }
+            = link_to I18n.t('common.show'), task
+          td
+            = link_to I18n.t('common.edit'), edit_task_path(task)
+          td
+            = link_to I18n.t('common.destroy'), task, method: :delete, data: { confirm: I18n.t('common.are_you_sure') }

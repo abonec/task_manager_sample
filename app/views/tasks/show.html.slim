@@ -1,18 +1,31 @@
 .page-header
   = link_to tasks_path, class: 'btn btn-default' do
     span.glyphicon.glyphicon-list-alt
-    |  Back
+    = I18n.t('common.back')
     = link_to edit_task_path(@task), class: 'btn btn-primary' do
       span.glyphicon.glyphicon-pencil
-      |  Edit
+      = I18n.t('common.edit')
   h1
-    | Show task
+    = I18n.t('tasks.show_task')
 dl.dl-horizontal
   dt
-    | Name:
+    = I18n.t('tasks.id')
+  dd
+    = @task.id
+  dt
+    = I18n.t('tasks.name')
   dd
     = @task.name
   dt
-    | Description:
+    = I18n.t('tasks.description')
   dd
     = @task.description
+  dt
+    = I18n.t('tasks.created_at')
+  dd
+    = @task.created_at
+  - if is_admin?
+    dt
+      = I18n.t('tasks.user')
+    dd
+      = @task.user.email
