@@ -49,6 +49,13 @@ describe TasksController, type: :controller do
         end.to change(Task, :count).by(-1)
         expect(response).to redirect_to(tasks_path)
       end
+
+      it 'should change user_id in tasks' do
+        @new_user = create(:user)
+        expect(@new_user).not_to eq(@task1.user)
+        put :update, id: @task1.id, task: { user_id: @new_user.id }
+        expect(assigns(:task).user).to eq(@new_user)
+      end
     end
     describe 'as normal user' do
       before :each do
@@ -110,6 +117,13 @@ describe TasksController, type: :controller do
         end
 
         expect(response).to redirect_to(task_path(@edited_task))
+      end
+
+      it 'and can\'t update task\'s user_id' do
+        @task = create(:task, user: @user)
+        @new_user = create(:user)
+        put :update, id: @task.id, task: { user_id: @new_user.id }
+        expect(assigns(:task).user).to eq(@user)
       end
     end
   end

@@ -3,6 +3,8 @@ class TasksController < ApplicationController
   before_filter :find_task, only: [:edit, :show, :update, :destroy]
   def index
     @tasks = current_user.admin? ? Task.all : current_user.tasks
+    # Костыли из-за отсутствия фронтенда:
+    @user_ids = User.pluck(:email, :id).to_h
   end
 
   def new
@@ -45,6 +47,10 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:name, :description, :file, :state)
+    if is_admin?
+      params.require(:task).permit(:name, :description, :file, :state, :user_id)
+    else
+      params.require(:task).permit(:name, :description, :file, :state)
+    end
   end
 end

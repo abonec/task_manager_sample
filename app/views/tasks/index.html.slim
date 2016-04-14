@@ -1,3 +1,5 @@
+javascript:
+  window.user_ids = #{@user_ids.to_json.html_safe}
 .page-header
   = link_to new_task_path, class: 'btn btn-primary' do
     span.glyphicon.glyphicon-plus
@@ -41,7 +43,7 @@
           td
             = task.created_at
           - if is_admin?
-            td
+            td.user_email data-id= task.id
               = task.user.try(:email)
           td
             = link_to I18n.t('common.show'), task
