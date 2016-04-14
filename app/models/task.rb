@@ -10,6 +10,12 @@ class Task < ActiveRecord::Base
 
   state_machine initial: :new do
     state :started, :finished
+    event :start do
+      transition new: :started
+    end
+    event :finish do
+      transition [:new, :started] => :finished
+    end
   end
 
   def has_file?

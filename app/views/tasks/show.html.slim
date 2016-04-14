@@ -21,6 +21,10 @@ dl.dl-horizontal
   dd
     = @task.description
   dt
+    = I18n.t('tasks.state')
+  dd
+    = @task.state
+  dt
     = I18n.t('tasks.created_at')
   dd
     = @task.created_at
