@@ -8,6 +8,10 @@ Demo app here: [http://task-manager-sample.herokuapp.com]
 * Admin: admin@gmail.com / secret
 * Regular user: regular@gmail.com / secret
 
+Fake data:
+* To add default users: rake db:seed
+* To add fake tasks: rake db:add_fake_data
+
 Things you may want to cover:
 
 * Ruby 2.2.2
