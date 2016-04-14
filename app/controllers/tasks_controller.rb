@@ -38,6 +38,7 @@ class TasksController < ApplicationController
   end
 
   private
+
   def find_task
     @task = Task.for(current_user).find_by id: params[:id]
     redirect_to tasks_path unless @task

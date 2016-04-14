@@ -3,10 +3,10 @@ require 'rails_helper'
 describe TasksController, type: :controller do
   describe 'should redirect if not signed in' do
     {
-        index: {method: :get},
-        edit: {method: :get, params: {id: 1}},
-        show: {method: :get, params: {id: 1}},
-        update: {method: :put, params: {id: 1}},
+      index: { method: :get },
+      edit: { method: :get, params: { id: 1 } },
+      show: { method: :get, params: { id: 1 } },
+      update: { method: :put, params: { id: 1 } }
     }.each do |action, options|
       it "from #{action}" do
         send(options[:method], action, options[:params])
@@ -44,9 +44,9 @@ describe TasksController, type: :controller do
       end
 
       it 'should delete foreign tasks' do
-        expect {
+        expect do
           delete :destroy, id: @task1.id
-        }.to change(Task, :count).by(-1)
+        end.to change(Task, :count).by(-1)
         expect(response).to redirect_to(tasks_path)
       end
     end
@@ -79,13 +79,13 @@ describe TasksController, type: :controller do
         end
       end
 
-      let (:task_attributes) {
-        { name: 'task_name', description: 'description', }
-      }
+      let (:task_attributes) do
+        { name: 'task_name', description: 'description' }
+      end
       it 'and create task' do
-        expect {
+        expect do
           post :create, task: task_attributes
-        }.to change(Task, :count).to 1
+        end.to change(Task, :count).to 1
 
         @task = assigns(:task)
         expect(@task.name).to eq(task_attributes[:name])
@@ -98,9 +98,9 @@ describe TasksController, type: :controller do
 
       it 'and update task' do
         @task = create(:task, user: @user)
-        expect {
+        expect do
           put :update, id: @task.id, task: task_attributes
-        }.not_to change(Task, :count)
+        end.not_to change(Task, :count)
 
         @edited_task = assigns(:task)
         expect(@task.id).to eq(@edited_task.id)
@@ -113,5 +113,4 @@ describe TasksController, type: :controller do
       end
     end
   end
-
 end

@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe SessionsController, type: :controller do
-
   before :each do
     @user = create(:user)
   end

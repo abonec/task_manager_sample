@@ -22,6 +22,5 @@ describe User, type: :model do
       @not_authenticated_user = User.authenticate email, 'wrong_password'
       expect(@not_authenticated_user).to be_nil
     end
-
   end
 end

@@ -6,9 +6,7 @@ module AuthenticationSystem
   end
 
   def current_user
-    unless @current_user == false
-      @current_user ||= login_from_session
-    end
+    @current_user ||= login_from_session unless @current_user == false
     @current_user
   end
 

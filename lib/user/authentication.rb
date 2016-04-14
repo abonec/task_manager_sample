@@ -3,7 +3,7 @@ module User::Authentication
   extend ActiveSupport::Concern
   def encrypt_password
     return if password.blank?
-    self.salt = Digest::SHA1.hexdigest("--#{Time.now.to_s}--#{email}--") if new_record?
+    self.salt = Digest::SHA1.hexdigest("--#{Time.now}--#{email}--") if new_record?
     self.crypted_password = encrypt(password)
   end
 
@@ -26,6 +26,7 @@ module User::Authentication
       user = User.where(email: email).first
       user && user.authenticated?(password) ? user : nil
     end
+
     def encrypt(password, salt)
       Digest::SHA1.hexdigest("--#{salt}--#{password}--")
     end
