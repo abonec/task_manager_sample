@@ -4,6 +4,8 @@
 
 Sample task manager app.
 
+Demo app here: [http://task-manager-sample.herokuapp.com/tasks]
+
 Things you may want to cover:
 
 * Ruby 2.2.2
