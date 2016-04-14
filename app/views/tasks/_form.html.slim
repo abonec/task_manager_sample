@@ -12,6 +12,7 @@
           li= msg
   = f.input :name, wrapper: :task_form_wrapper
   = f.input :description, wrapper: :task_form_wrapper, as: :text
+  = f.input :file, wrapper: :task_form_wrapper, as: :file
   .form-group
     .col-sm-offset-2.col-sm-10
       = f.submit class: 'btn btn-primary'

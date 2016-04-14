@@ -29,3 +29,12 @@ dl.dl-horizontal
       = I18n.t('tasks.user')
     dd
       = @task.user.email
+  - if @task.file.present?
+    dt
+      = I18n.t('tasks.file')
+    dd
+      - if @task.file.image?
+        = link_to @task.file.url, target: '_blank' do
+          = image_tag @task.file.url
+      - else
+        = link_to @task.file.file_name, @task.file.url, target: '_blank'

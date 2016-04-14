@@ -6,7 +6,13 @@ class Task < ActiveRecord::Base
 
   validates :name, presence: true
 
+  mount_uploader :file, TaskFileUploader
+
   state_machine initial: :new do
     state :started, :finished
+  end
+
+  def has_file?
+    file.present?
   end
 end
