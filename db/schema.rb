@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160412160103) do
+ActiveRecord::Schema.define(version: 20160414100945) do
 
   create_table "tasks", force: :cascade do |t|
     t.string   "name"
@@ -25,9 +25,9 @@ ActiveRecord::Schema.define(version: 20160412160103) do
   create_table "users", force: :cascade do |t|
     t.string   "email"
     t.string   "crypted_password"
-    t.string   "role"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.string   "role",             default: "regular"
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
     t.string   "salt"
   end
 

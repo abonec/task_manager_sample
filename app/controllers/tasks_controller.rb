@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   before_filter :login_required
   before_filter :find_task, only: [:edit, :show, :update, :destroy]
   def index
-    @tasks = current_user.tasks
+    @tasks = current_user.admin? ? Task.all : current_user.tasks
   end
 
   def new

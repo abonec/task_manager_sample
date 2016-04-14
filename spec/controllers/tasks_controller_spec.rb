@@ -15,6 +15,20 @@ describe TasksController, type: :controller do
     end
   end
   describe 'should works with tasks' do
+    describe 'as admin user' do
+      before :each do
+        @admin = create(:admin)
+        @admin_task = create(:task, user: @admin)
+        @task1 = create(:task)
+        @task2 = create(:task)
+        sign_in @admin
+      end
+
+      it 'should see all tasks' do
+        get :index
+        expect(assigns(:tasks).sort).to eq([@admin_task, @task1, @task2].sort)
+      end
+    end
     describe 'as normal user' do
       before :each do
         @user = create(:user)
