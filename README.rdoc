@@ -5,6 +5,8 @@
 Sample task manager app.
 
 Demo app here: [http://task-manager-sample.herokuapp.com/tasks]
+* Admin: admin@gmail.com / secret
+* Regular user: regular@gmail.com / secret
 
 Things you may want to cover:
 
