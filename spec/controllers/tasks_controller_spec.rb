@@ -28,6 +28,27 @@ describe TasksController, type: :controller do
         get :index
         expect(assigns(:tasks).sort).to eq([@admin_task, @task1, @task2].sort)
       end
+
+      %i(show edit).each do |action|
+        it "should #{action} foreign tasks" do
+          get action, id: @task1.id
+          expect(assigns(:task)).to eq(@task1)
+        end
+      end
+
+      it 'should update foreign tasks' do
+        name = 'new task name'
+        put :update, id: @task1.id, task: { name: name }
+        expect(response).to redirect_to(task_path(@task1))
+        expect(assigns(:task).name).to eq(name)
+      end
+
+      it 'should delete foreign tasks' do
+        expect {
+          delete :destroy, id: @task1.id
+        }.to change(Task, :count).by(-1)
+        expect(response).to redirect_to(tasks_path)
+      end
     end
     describe 'as normal user' do
       before :each do
@@ -38,6 +59,7 @@ describe TasksController, type: :controller do
       it 'and show all own tasks' do
         @task1 = create(:task, user: @user)
         @task2 = create(:task, user: @user)
+        create(:task, user: create(:admin))
         get :index
         expect(assigns(:tasks).sort).to eq([@task1, @task2].sort)
       end
