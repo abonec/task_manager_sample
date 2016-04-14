@@ -89,6 +89,11 @@ describe TasksController, type: :controller do
       let (:task_attributes) do
         { name: 'task_name', description: 'description' }
       end
+
+      it 'should see blank task on new' do
+        get :new
+        expect(assigns(:task)).not_to be_persisted
+      end
       it 'and create task' do
         expect do
           post :create, task: task_attributes
