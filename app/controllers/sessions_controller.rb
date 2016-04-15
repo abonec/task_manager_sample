@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
   attr_reader :credentials
 
   def create
-    self.current_user = User.authenticate credentials[:email], credentials[:password]
+    authenticate credentials[:email], credentials[:password]
     if logged_in?
       redirect_to tasks_path
     else

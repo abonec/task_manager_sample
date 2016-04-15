@@ -4,6 +4,9 @@ module AuthenticationSystem
     base.send :helper_method, :current_user, :logged_in?, :is_admin? if base.respond_to? :helper_method
   end
 
+  def authenticate(email, password)
+    self.current_user = User.authenticate email, password
+  end
   def current_user=(new_user)
     session[:user_id] = new_user ? new_user.id : nil
     @current_user = new_user || false
@@ -11,8 +14,7 @@ module AuthenticationSystem
   end
 
   def current_user
-    @current_user ||= login_from_session unless @current_user == false
-    @current_user
+    @current_user ||= login_from_session
   end
 
   def login_required
