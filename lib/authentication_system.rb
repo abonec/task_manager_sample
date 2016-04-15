@@ -19,6 +19,10 @@ module AuthenticationSystem
     logged_in? || access_denied
   end
 
+  def admin_required
+    (login_required && is_admin?) || admin_access_denied
+  end
+
   def logged_in?
     current_user
   end
@@ -30,6 +34,13 @@ module AuthenticationSystem
   def access_denied
     respond_to do |format|
       format.html { redirect_to new_sessions_path }
+    end
+  end
+
+  def admin_access_denied
+    respond_to do |format|
+      format.html { redirect_to tasks_path }
+      format.json { render json: { error: :permission_denied } }
     end
   end
 

@@ -19,9 +19,10 @@ $ ->
   
     
   $(document).on 'click', 'td.user_email', (e) ->
-    text = "Список всех id пользователей: \r\n #{JSON.stringify(user_ids)} \r\n Для смены пользователя введите нужный:"
-    user_id = prompt(text)
-    
-    update_task($(this).data('id'), user_id: user_id)
+    $.get('/tasks/user_ids').success (data) ->
+      text = "Список всех id пользователей: \r\n #{JSON.stringify(data.users)} \r\n Для смены пользователя введите нужный:"
+      user_id = prompt(text)
+      
+      update_task($(this).data('id'), user_id: user_id)
     
     e.preventDefault()

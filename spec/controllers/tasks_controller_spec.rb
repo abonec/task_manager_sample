@@ -56,6 +56,11 @@ describe TasksController, type: :controller do
         put :update, id: @task1.id, task: { user_id: @new_user.id }
         expect(assigns(:task).user).to eq(@new_user)
       end
+
+      it 'should get user_ids for change for tasks' do
+        get :user_ids
+        expect(response.body).to eq({users: User.pluck(:email, :id).to_h}.to_json)
+      end
     end
     describe 'as normal user' do
       before :each do
@@ -129,6 +134,11 @@ describe TasksController, type: :controller do
         @new_user = create(:user)
         put :update, id: @task.id, task: { user_id: @new_user.id }
         expect(assigns(:task).user).to eq(@user)
+      end
+
+      it 'and can\'t get user_ids' do
+        get :user_ids
+        expect(response).to redirect_to(tasks_path)
       end
     end
   end

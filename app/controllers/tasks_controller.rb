@@ -1,10 +1,9 @@
 class TasksController < ApplicationController
   before_filter :login_required
+  before_filter :admin_required, only: :user_ids
   before_filter :find_task, only: [:edit, :show, :update, :destroy]
   def index
     @tasks = current_user.admin? ? Task.all : current_user.tasks
-    # Костыли из-за отсутствия фронтенда:
-    @user_ids = User.pluck(:email, :id).to_h
   end
 
   def new
@@ -37,6 +36,10 @@ class TasksController < ApplicationController
   def destroy
     @task.destroy
     redirect_to tasks_path
+  end
+
+  def user_ids
+    render json: { users: User.pluck(:email, :id).to_h }
   end
 
   private
